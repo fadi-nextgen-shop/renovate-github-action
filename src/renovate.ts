@@ -70,7 +70,24 @@ class Renovate {
 
     const command = `docker run ${dockerArguments.join(' ')}`;
 
-    const code = await exec(command);
+    let myOutput = 'Output of exec():';
+
+    const code = await exec(command, undefined, {
+      listeners: {
+        stdline: (data: string) => {
+          myOutput += `\nstdout: ${data.toString()}`;
+        },
+        errline: (data: string) => {
+          myOutput += `\nstderr: ${data.toString()}`;
+        },
+        debug: (data: string) => {
+          myOutput += `\ndebug: ${data}`;
+        },
+      },
+    });
+
+    console.log(myOutput);
+
     if (code !== 0) {
       new Error(`'docker run' failed with exit code ${code}.`);
     }
