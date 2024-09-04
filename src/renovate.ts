@@ -69,6 +69,7 @@ class Renovate {
     }
 
     const command = `docker run ${dockerArguments.join(' ')}`;
+    console.log(`Running command: '${command}'`);
 
     let myOutput = 'Output of exec():';
 

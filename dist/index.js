@@ -26430,6 +26430,7 @@ class Renovate {
             dockerArguments.push(dockerCmd);
         }
         const command = `docker run ${dockerArguments.join(' ')}`;
+        console.log(`Running command: '${command}'`);
         let myOutput = 'Output of exec():';
         const code = await (0, exec_1.exec)(command, undefined, {
             listeners: {
